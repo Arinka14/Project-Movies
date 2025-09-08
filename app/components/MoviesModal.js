@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 
-export default function MovieModal({ selectedMovie }) {
+export default function MovieModal({ selectedMovie, onAddWatchLater }) {
   return (
     <div className="modal fade" id="movieModal" tabIndex="-1" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -33,7 +33,20 @@ export default function MovieModal({ selectedMovie }) {
                   </div>
                 </div>
                 <div className="text-end mt-3">
-                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary me-2"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => onAddWatchLater(selectedMovie)}
+                  >
+                    + Tambah ke Tonton Nanti
+                  </button>
                 </div>
               </>
             ) : (

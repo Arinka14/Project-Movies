@@ -10,6 +10,7 @@ export default function Home() {
   const [query, setQuery] = useState("")
   const [selectedMovie, setSelectedMovie] = useState(null)
   const [hasSearched, setHasSearched] = useState(false)
+  const [watchLater, setWatchLater] = useState([])
 
   const searchMovies = async () => {
     if (!query) return
@@ -20,6 +21,10 @@ export default function Home() {
     setHasSearched(true)
 
     if (data.Response === "True") {
+      const uniqueMovies = data.Search.filter(
+      (movie, index, self) =>
+        index === self.findIndex((m) => m.imdbID === movie.imdbID)
+      )
       setMovies(data.Search)
     } else {
       setMovies([])
@@ -34,6 +39,12 @@ export default function Home() {
     setSelectedMovie(data)
   }
 
+  const addToWatchLater = (movie) => {
+  setWatchLater((prev) => {
+    if (prev.find((m) => m.imdbID === movie.imdbID)) return prev
+    return [...prev, movie]
+  })
+}
   return (
     <><nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
@@ -43,38 +54,71 @@ export default function Home() {
           </a>
           <span className="navbar-text text-light">
             Search movie
-          </span>
+          </span>ww
         </div>
       </div>
-    </nav><div className="container mt-5">
-        <h1 className="text-center mb-5">Search Movie</h1>
-        <div className="row justify-content-center">
-          <div className="col-md-7">
-            <div className="input-group mb-4">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Movie title..."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && searchMovies()} />
-              <button className="btn btn-dark" onClick={searchMovies}>Search</button>
-            </div>
+    
+     <div className="dropdown">
+        <button
+        className="btn dropdown-toggle"
+        style={{ border: "none", background: "transparent", color: "white" }}
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+              🛒 ({watchLater.length})
+            </button>
+            <ul className="dropdown-menu dropdown-menu-end">
+              {watchLater.length === 0 ? (
+                <li className="dropdown-item text-muted">Belum ada film</li>
+              ) : (
+                watchLater.map((movie) => (
+                  <li key={movie.imdbID} className="dropdown-item">
+                    {movie.Title} ({movie.Year})
+                  </li>
+                ))
+              )}
+            </ul>
           </div>
-        </div>
+      </nav>
+      <><div className="container mt-5">
+          <h1 className="text-center mb-5">Search Movie</h1>
+          <div className="row justify-content-center">
+            <div className="col-md-7">
+              <div className="input-group mb-4">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Movie title..."
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && searchMovies()} />
+                <button className="btn btn-dark" onClick={searchMovies}>Search</button>
+              </div>
+            </div>
+          </div>  
 
-        <hr className="w-75 mx-auto" />
-        <div className="row">
-          {movies.map((movie) => (
-            <MovieCard key={movie.imdbID} movie={movie} onSelect={getMovieDetail} />
-          ))}
-        </div>
+          <hr className="w-75 mx-auto" />
+          <div className="row">
+            {movies.map((movie) => (
+              <MovieCard key={movie.imdbID} movie={movie} onSelect={getMovieDetail} />
+            ))}
+          </div>
 
-        {hasSearched && movies.length === 0 && (
-          <div className="text-center text-dark fw-bold fs-2 mt-4">
-            Movies Not Found
-          </div> 
+          {hasSearched && movies.length === 0 && (
+            <div className="text-center text-dark fw-bold fs-2 mt-4">
+              Movies Not Found
+            </div>
+          )}
+
+        {selectedMovie && (
+        <MovieModal
+          selectedMovie={selectedMovie}
+          onAddWatchLater={addToWatchLater}
+        />
         )}
-      </div><MovieModal selectedMovie={selectedMovie} /></>
+
+        </div>
+        </></>
   )
 }
