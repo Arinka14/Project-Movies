@@ -4,6 +4,7 @@ import { useState } from "react"
 import MovieCard from "./components/MoviesCard"
 import MovieModal from "./components/MoviesModal"
 
+
 export default function Home() {
   const [movies, setMovies] = useState([])
   const [query, setQuery] = useState("")
@@ -34,20 +35,20 @@ export default function Home() {
   }
 
   return (
-      <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div className="container">
-          <a className="navbar-brand" href="#">Wpu movie</a>
-
-          <span className="navbar-text text-light ms-3">
+    <><nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container">
+        <div className="d-flex align-items-center">
+          <a className="navbar-brand me-3" href="#">
+            Wpu movie
+          </a>
+          <span className="navbar-text text-light">
             Search movie
-              </span>
-                 </div>
-                   </nav> 
-
-      <div className="container mt-5">
+          </span>
+        </div>
+      </div>
+    </nav><div className="container mt-5">
         <h1 className="text-center mb-5">Search Movie</h1>
-    <div className="row justify-content-center">
+        <div className="row justify-content-center">
           <div className="col-md-7">
             <div className="input-group mb-4">
               <input
@@ -56,8 +57,7 @@ export default function Home() {
                 placeholder="Movie title..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && searchMovies()}
-              />
+                onKeyDown={(e) => e.key === "Enter" && searchMovies()} />
               <button className="btn btn-dark" onClick={searchMovies}>Search</button>
             </div>
           </div>
@@ -73,10 +73,8 @@ export default function Home() {
         {hasSearched && movies.length === 0 && (
           <div className="text-center text-dark fw-bold fs-2 mt-4">
             Movies Not Found
-          </div>
+          </div> 
         )}
-      </div>
-      <MovieModal selectedMovie={selectedMovie} />
-    </div>
+      </div><MovieModal selectedMovie={selectedMovie} /></>
   )
 }
