@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect} from "react"
 import MovieCard from "./components/MoviesCard"
 import MovieModal from "./components/MoviesModal"
 
@@ -11,8 +11,24 @@ export default function Home() {
   const [selectedMovie, setSelectedMovie] = useState(null)
   const [hasSearched, setHasSearched] = useState(false)
   const [watchLater, setWatchLater] = useState([])
+  const clearSelectedMovie = () => setSelectedMovie(null)
 
-  const searchMovies = async () => {
+  const removeFromWatchLater = (imdbID) => {
+  setWatchLater((prev) => prev.filter((m) => m.imdbID !== imdbID))
+}
+
+   useEffect(() => {
+    const saved = localStorage.getItem("watchLater")
+    if (saved) {
+      setWatchLater(JSON.parse(saved))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem("watchLater", JSON.stringify(watchLater))
+  }, [watchLater])
+
+  async function searchMovies() {
     if (!query) return
 
     const res = await fetch(`https://www.omdbapi.com/?apikey=fb7a98f8&s=${query}`)
@@ -22,8 +38,7 @@ export default function Home() {
 
     if (data.Response === "True") {
       const uniqueMovies = data.Search.filter(
-      (movie, index, self) =>
-        index === self.findIndex((m) => m.imdbID === movie.imdbID)
+        (movie, index, self) => index === self.findIndex((m) => m.imdbID === movie.imdbID)
       )
       setMovies(data.Search)
     } else {
@@ -45,6 +60,7 @@ export default function Home() {
     return [...prev, movie]
   })
 }
+
   return (
     <><nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
@@ -54,28 +70,38 @@ export default function Home() {
           </a>
           <span className="navbar-text text-light">
             Search movie
-          </span>ww
+          </span>
         </div>
       </div>
     
-     <div className="dropdown">
+        <div className="dropdown me-5">
         <button
-        className="btn dropdown-toggle"
-        style={{ border: "none", background: "transparent", color: "white" }}
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-              🛒 ({watchLater.length})
-            </button>
+            className="btn dropdown-toggle"
+            style={{ border: "none", background: "transparent", color: "white" }}
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            data-bs-dismiss="modal"
+        >
+          🛒 ({watchLater.length})
+        </button>
+
             <ul className="dropdown-menu dropdown-menu-end">
               {watchLater.length === 0 ? (
                 <li className="dropdown-item text-muted">Belum ada film</li>
               ) : (
                 watchLater.map((movie) => (
-                  <li key={movie.imdbID} className="dropdown-item">
-                    {movie.Title} ({movie.Year})
-                  </li>
+      <li key={movie.imdbID} className="dropdown-item d-flex justify-content-between align-items-center">
+                    <span>
+          {movie.Title} ({movie.Year})
+        </span>
+        <button
+          className="btn btn-sm btn-danger ms-2"
+          onClick={() => removeFromWatchLater(movie.imdbID)}
+        >
+          ✕
+        </button>
+      </li>
                 ))
               )}
             </ul>
@@ -111,12 +137,14 @@ export default function Home() {
             </div>
           )}
 
-        {selectedMovie && (
-        <MovieModal
-          selectedMovie={selectedMovie}
-          onAddWatchLater={addToWatchLater}
-        />
-        )}
+            {selectedMovie && (
+              <MovieModal
+                selectedMovie={selectedMovie}
+                onAddWatchLater={addToWatchLater}
+                onClose={clearSelectedMovie}  
+              />
+            )}
+
 
         </div>
         </></>

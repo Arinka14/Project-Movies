@@ -1,14 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 
-export default function MovieModal({ selectedMovie, onAddWatchLater }) {
+export default function MovieModal({ selectedMovie, onAddWatchLater, onClose }) {
+  const handleAdd = () => {
+    onAddWatchLater(selectedMovie)
+
+    const closeBtn = document.querySelector("#movieModal .btn-close")
+    if (closeBtn) closeBtn.click()
+
+    if (onClose) onClose()
+  }
+
   return (
     <div className="modal fade" id="movieModal" tabIndex="-1" aria-hidden="true">
       <div className="modal-dialog modal-lg">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">{selectedMovie?.Title}</h5>
-            <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="modal"
+              onClick={onClose} 
+            ></button>
           </div>
           <div className="modal-body">
             {selectedMovie ? (
@@ -37,13 +51,14 @@ export default function MovieModal({ selectedMovie, onAddWatchLater }) {
                     type="button"
                     className="btn btn-secondary me-2"
                     data-bs-dismiss="modal"
+                    onClick={onClose}
                   >
                     Close
                   </button>
                   <button
                     type="button"
                     className="btn btn-primary"
-                    onClick={() => onAddWatchLater(selectedMovie)}
+                    onClick={handleAdd}
                   >
                     + Tambah ke Tonton Nanti
                   </button>
