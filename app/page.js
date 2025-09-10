@@ -17,6 +17,12 @@ export default function Home() {
   setWatchLater((prev) => prev.filter((m) => m.imdbID !== imdbID))
 }
 
+  const clearWatchLater = () => {
+    setWatchLater([])   // hapus semua daftar
+    localStorage.removeItem("watchLater") // kosongkan localStorage juga
+  }
+
+
    useEffect(() => {
     const saved = localStorage.getItem("watchLater")
     if (saved) {
@@ -48,18 +54,18 @@ export default function Home() {
     setQuery("")
   }
 
-  const getMovieDetail = async (imdbID) => {
-    const res = await fetch(`https://www.omdbapi.com/?apikey=fb7a98f8&i=${imdbID}`)
-    const data = await res.json()
-    setSelectedMovie(data)
-  }
+      const getMovieDetail = async (imdbID) => {
+        const res = await fetch(`https://www.omdbapi.com/?apikey=fb7a98f8&i=${imdbID}`)
+        const data = await res.json()
+        setSelectedMovie(data)
+      }
 
-  const addToWatchLater = (movie) => {
-  setWatchLater((prev) => {
-    if (prev.find((m) => m.imdbID === movie.imdbID)) return prev
-    return [...prev, movie]
-  })
-}
+      const addToWatchLater = (movie) => {
+      setWatchLater((prev) => {
+        if (prev.find((m) => m.imdbID === movie.imdbID)) return prev
+        return [...prev, movie]
+      })
+    }
 
   return (
     <><nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -86,25 +92,42 @@ export default function Home() {
           🛒 ({watchLater.length})
         </button>
 
-            <ul className="dropdown-menu dropdown-menu-end">
-              {watchLater.length === 0 ? (
-                <li className="dropdown-item text-muted">Belum ada film</li>
-              ) : (
-                watchLater.map((movie) => (
-      <li key={movie.imdbID} className="dropdown-item d-flex justify-content-between align-items-center">
-                    <span>
-          {movie.Title} ({movie.Year})
-        </span>
-        <button
-          className="btn btn-sm btn-danger ms-2"
-          onClick={() => removeFromWatchLater(movie.imdbID)}
-        >
-          ✕
-        </button>
-      </li>
-                ))
-              )}
-            </ul>
+        <ul className="dropdown-menu dropdown-menu-end">
+  {watchLater.length === 0 ? (
+    <li className="dropdown-item text-muted">Belum ada film</li>
+  ) : (
+    <>
+          {watchLater.map((movie) => {
+            return (
+              <li
+                key={movie.imdbID}
+                className="dropdown-item d-flex justify-content-between align-items-center"
+              >
+                <span>
+                  {movie.Title} ({movie.Year})
+                </span>
+                <button
+                  className="btn btn-sm btn-danger ms-2"
+                  onClick={() => removeFromWatchLater(movie.imdbID)}
+                >
+                  ✕
+                </button>
+              </li>
+            )
+          })}
+
+          <li>
+            <button
+              className="dropdown-item text-danger text-center"
+              onClick={clearWatchLater}
+            >
+              🗑️ Clear All
+            </button>
+          </li>
+        </>
+      )}
+    </ul>
+
           </div>
       </nav>
       <><div className="container mt-5">
