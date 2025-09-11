@@ -14,7 +14,7 @@ export default function MovieCard({ movie, onSelect }) {
           <h5 className="card-title">{movie.Title}</h5>
           <p className="card-text">Year: {movie.Year}</p>
           <button
-            className="btn btn-primary"
+            className="btn btn-warning"
             data-bs-toggle="modal"
             data-bs-target="#movieModal"
             onClick={() => onSelect(movie.imdbID)}

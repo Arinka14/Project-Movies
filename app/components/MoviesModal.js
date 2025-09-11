@@ -60,7 +60,7 @@ export default function MovieModal({ selectedMovie, onAddWatchLater, onClose }) 
                     className="btn btn-primary"
                     onClick={handleAdd}
                   >
-                    + Tambah ke Tonton Nanti
+                  + Tonton Nanti
                   </button>
                 </div>
               </>
