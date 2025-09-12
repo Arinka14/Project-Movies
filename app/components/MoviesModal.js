@@ -73,3 +73,4 @@ export default function MovieModal({ selectedMovie, onAddWatchLater, onClose }) 
     </div>
   )
 }
+
