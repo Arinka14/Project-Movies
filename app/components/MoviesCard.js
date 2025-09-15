@@ -3,7 +3,7 @@
 
 export default function MovieCard({ movie, onSelect }) {
   return (
-    <div className="col-md-4 my-3">
+    <div className="col-md-3 my-3">
       <div className="card">
         <img
           src={movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/300x450?text=No+Image"}

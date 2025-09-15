@@ -1,11 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 
-export default function MovieWatchList({
+import { useState } from "react"
+
+export default function MovieKeranjang({
   watchLater,
   removeFromWatchLater,
   clearWatchLater,
-}) {
+ }) {
+
+  const [clickedId, setClickedId] = useState(null)
+
   if (!watchLater || watchLater.length === 0) {
     return (
       <div className="text-center mt-5">
@@ -13,13 +18,13 @@ export default function MovieWatchList({
         <p className="text-muted">Add some movies to get started 🍿</p>
       </div>
     )
-  } 
+  }
 
   return (
     <div className="mt-4">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h2 className="fw-bold">🎬 Your Watchlist</h2>
-        <button className="btn btn-danger btn-sm" onClick={clearWatchLater}>
+        <button className="btn btn-dark btn-sm" onClick={clearWatchLater}>
           Clear All
         </button>
       </div>
@@ -31,7 +36,6 @@ export default function MovieWatchList({
             className="list-group-item list-group-item-action d-flex align-items-start mb-3 shadow-sm"
             style={{ borderRadius: "10px" }}
           >
-
             <img
               src={movie.Poster !== "N/A" ? movie.Poster : "/no-image.jpg"}
               alt={movie.Title}
@@ -45,22 +49,43 @@ export default function MovieWatchList({
             />
 
             <div className="flex-grow-1">
-              <h5 className="mb-1 fw-bold">
+              <h5
+                className="mb-1 fw-bold"
+                style={{
+                  color: clickedId === movie.imdbID ? "black" : "black",
+                }}
+                onClick={() => setClickedId(movie.imdbID)}
+              >
                 {index + 1}. {movie.Title}
               </h5>
+
               <p style={{ fontSize: "0.85rem" }}>{movie.Plot}</p>
               <div style={{ fontSize: "0.8rem" }}>
-                <strong>Director:</strong> {movie.Director}
-              </div>
-              <div style={{ fontSize: "0.8rem" }}>
-                <strong>Stars:</strong> {movie.Actors}
+                <strong>Released:</strong> {movie.Released}
+                <div style={{ fontSize: "0.8rem" }}>
+                  <strong>Director:</strong> {movie.Director}
+                  <div style={{ fontSize: "0.8rem" }}>
+                    <strong>Actors:</strong> {movie.Actors}
+                  </div>
+                </div>
               </div>
             </div>
+
             <button
-              className="btn btn-outline-danger btn-sm ms-3"
               onClick={() => removeFromWatchLater(movie.imdbID)}
+              style={{
+                background: "transparent",
+                border: "1px solid black",
+                color: "black",
+                fontSize: "0.85rem",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                alignSelf: "flex-end",
+              }}
             >
-              ❌ Remove
+              ✖️ <span>Hapus</span>
             </button>
           </div>
         ))}

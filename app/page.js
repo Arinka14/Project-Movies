@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import MovieCard from "./components/MoviesCard"
 import MovieModal from "./components/MoviesModal"
-import MovieWatchList from "./components/MoviesWatchList"
+import MovieKeranjang from "./components/MoviesKeranjang"
 
 export default function Home() {
   const [movies, setMovies] = useState([])
@@ -64,7 +64,7 @@ const addToWatchLater = async (movie) => {
 
   setWatchLater((prev) => {
     if (prev.find((m) => m.imdbID === fullData.imdbID)) return prev
-    return [...prev, fullData] 
+    return [...prev, fullData]  
   })
 }
 
@@ -74,23 +74,23 @@ return (
         <div className="container">
           <div className="d-flex align-items-center">
             <a className="navbar-brand me-3" href="#">
-              Wpu movie
+              Wpu Movie
             </a>
-            <span className="navbar-text text-light">Search movie</span>
+            <span className="navbar-text text-dark">Search movie</span>
           </div>
 
           <button
-            className="btn btn-dark ms-auto"
+            className="btn ms-auto"
             onClick={() => setShowWatchList(!showWatchList)}
           >
-            {showWatchList ? "⬅️ Back" : `🛒 (${watchLater.length})`}
+            {showWatchList ? "Back" : `🛒 (${watchLater.length})`}
           </button>
         </div>
       </nav>
 
       <div className="container mt-5">
         {showWatchList ? (
-          <MovieWatchList
+          <MovieKeranjang
             watchLater={watchLater}
             removeFromWatchLater={removeFromWatchLater}
             clearWatchLater={clearWatchLater}
@@ -109,7 +109,7 @@ return (
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && searchMovies()}
                   />
-                  <button className="btn btn-warning" onClick={searchMovies}>
+                  <button className="btn btn-dark" onClick={searchMovies}>
                     Search
                   </button>
                 </div>
