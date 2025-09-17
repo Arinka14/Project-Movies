@@ -80,11 +80,12 @@ return (
           </div>
 
           <button
-            className="btn ms-auto"
-            onClick={() => setShowWatchList(!showWatchList)}
-          >
-            {showWatchList ? "Back" : `🛒 (${watchLater.length})`}
-          </button>
+        className="btn btn-dark rounded-pill px-4 fw-semibold"
+        onClick={() => setShowWatchList(!showWatchList)}
+      >
+        {showWatchList ? "⬅️ Back" : `🛒 Watchlist (${watchLater.length})`}
+      </button>
+
         </div>
       </nav>
 
@@ -99,24 +100,28 @@ return (
           <>
             <h1 className="text-center mb-5">Search Movie</h1>
             <div className="row justify-content-center">
-              <div className="col-md-7">
-                <div className="input-group mb-4">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Movie title..."
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && searchMovies()}
-                  />
-                  <button className="btn btn-dark" onClick={searchMovies}>
-                    Search
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <hr className="hr-custom w-75 mx-auto" />
+         <div className="col-md-7">
+      <div className="d-flex justify-content-center mb-4">
+        <div className="input-group w-100 shadow-sm" style={{ maxWidth: "800px" }}>
+          <input
+            type="text"
+            className="form-control rounded-start-pill px-3 py-2"
+            placeholder="🎬 Cari film favoritmu..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && searchMovies()}
+          />
+          <button 
+            className="btn btn-dark px-3 py-2 fw-semibold rounded-end-pill"
+            onClick={searchMovies}
+          >
+            🚀 Search
+          </button>
+        </div>
+      </div>
+    </div>
+         </div>
+          <hr className="hr-custom w-75 mx-auto" />
             <div className="row">
               {movies.map((movie) => (
                 <MovieCard key={movie.imdbID} movie={movie} onSelect={getMovieDetail} />
