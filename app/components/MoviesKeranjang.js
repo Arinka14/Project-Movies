@@ -9,13 +9,12 @@ export default function MovieKeranjang({
   clearWatchLater,
  }) {
 
-  const [clickedId, setClickedId] = useState(null)
+const [clickedId, setClickedId] = useState(null)
 
-  if (!watchLater || watchLater.length === 0) {
+if (!watchLater || watchLater.length === 0) {
     return (
       <div className="text-center mt-5">
-        <h2 className="fw-bold">Your Watchlist is empty</h2>
-        <p className="text-muted">Add some movies to get started 🍿</p>
+         <h2 className="fw-bold">Your Watchlist is empty</h2>
       </div>
     )
   }
@@ -52,7 +51,7 @@ export default function MovieKeranjang({
               <h5
                 className="mb-1 fw-bold"
                 style={{
-                  color: clickedId === movie.imdbID ? "black" : "black",
+                  color: clickedId === movie.imdbID ? "gray" : "black",
                 }}
                 onClick={() => setClickedId(movie.imdbID)}
               >

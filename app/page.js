@@ -58,35 +58,35 @@ export default function Home() {
     setSelectedMovie(data)
   }
 
-const addToWatchLater = async (movie) => {
-  const res = await fetch(`https://www.omdbapi.com/?apikey=fb7a98f8&i=${movie.imdbID}`)
-  const fullData = await res.json()
+  const addToWatchLater = async (movie) => {
+    const res = await fetch(`https://www.omdbapi.com/?apikey=fb7a98f8&i=${movie.imdbID}`)
+    const fullData = await res.json()
 
-  setWatchLater((prev) => {
-    if (prev.find((m) => m.imdbID === fullData.imdbID)) return prev
-    return [...prev, fullData]  
-  })
-}
+    setWatchLater((prev) => {
+      if (prev.find((m) => m.imdbID === fullData.imdbID)) return prev
+      return [...prev, fullData]  
+    })
+  }
 
 return (
     <>
       <nav className="navbar navbar-expand-lg navbar-warning bg-warning">
         <div className="container">
-          <div className="d-flex align-items-center">
-            <a className="navbar-brand me-3" href="#">
-              Wpu Movie
-            </a>
-            <span className="navbar-text text-dark">Search movie</span>
-          </div>
-
+<div className="flex items-center space-x-3">
+  <h3 className="text-xs font-extrabold text-black tracking-wide">
+    🎬 WPU Movie
+  </h3>
+  <span className="text-xs font-semibold text-gray-800 italic">
+    Search Movie
+  </span>
+</div>
           <button
         className="btn btn-dark rounded-pill px-4 fw-semibold"
         onClick={() => setShowWatchList(!showWatchList)}
       >
         {showWatchList ? "⬅️ Back" : `🛒 Watchlist (${watchLater.length})`}
       </button>
-
-        </div>
+      </div>
       </nav>
 
       <div className="container mt-5">
@@ -98,23 +98,24 @@ return (
           />
         ) : (
           <>
-            <h1 className="text-center mb-5">Search Movie</h1>
+            <h2 className="text-center mb-3">Search Movie</h2>
             <div className="row justify-content-center">
+        
          <div className="col-md-7">
       <div className="d-flex justify-content-center mb-4">
         <div className="input-group w-100 shadow-sm" style={{ maxWidth: "800px" }}>
           <input
             type="text"
             className="form-control rounded-start-pill px-3 py-2"
-            placeholder="🎬 Cari film favoritmu..."
+            placeholder=" Search Your Movies..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && searchMovies()}
           />
           <button 
             className="btn btn-dark px-3 py-2 fw-semibold rounded-end-pill"
-            onClick={searchMovies}
-          >
+            onClick={searchMovies} 
+             >
             🚀 Search
           </button>
         </div>
@@ -133,8 +134,7 @@ return (
                 Movies Not Found
               </div>
             )}
-
-            {selectedMovie && (
+          {selectedMovie && (
               <MovieModal
                 selectedMovie={selectedMovie}
                 onAddWatchLater={addToWatchLater}
