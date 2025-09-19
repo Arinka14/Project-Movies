@@ -73,13 +73,16 @@ return (
       <nav className="navbar navbar-expand-lg navbar-warning bg-warning">
         <div className="container">
 <div className="flex items-center space-x-3">
-  <h3 className="text-xs font-extrabold text-black tracking-wide">
-    🎬 WPU Movie
-  </h3>
-  <span className="text-xs font-semibold text-gray-800 italic">
-    Search Movie
-  </span>
+  <div className="flex items-center space-x-3">
+  <div className="bg-black rounded-pill px-3 py-1 rounded-full">
+    <h4 className="text-sm fw-semibold text-white tracking-wide">
+      Wpu Movie
+    </h4>
+  </div>
 </div>
+
+</div>
+
           <button
         className="btn btn-dark rounded-pill px-4 fw-semibold"
         onClick={() => setShowWatchList(!showWatchList)}
