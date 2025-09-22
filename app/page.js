@@ -19,30 +19,32 @@ export default function Home() {
   }
 
   const clearWatchLater = () => {
-    setWatchLater([])
+    setWatchLater([]) 
     localStorage.removeItem("watchLater")
-      }  
-  useEffect(() => {
-        const saved = localStorage.getItem("watchLater")
-        if (saved) {
-          setWatchLater(JSON.parse(saved))
-        }
-      }, [])
+  }
 
   useEffect(() => {
-        localStorage.setItem("watchLater", JSON.stringify(watchLater))
-      }, [watchLater])
+    const saved = localStorage.getItem("watchLater")
+    if (saved) {
+      setWatchLater(JSON.parse(saved))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem("watchLater", JSON.stringify(watchLater))
+  }, [watchLater])
 
   async function searchMovies() {
     if (!query) return
-     const res = await fetch(`https://www.omdbapi.com/?apikey=fb7a98f8&s=${query}`)
-     const data = await res.json()
+    const res = await fetch(`https://www.omdbapi.com/?apikey=fb7a98f8&s=${query}`)
+    const data = await res.json()
 
     setHasSearched(true)
 
     if (data.Response === "True") {
       const uniqueMovies = data.Search.filter(
-        (movie, index, self) => index === self.findIndex((m) => m.imdbID === movie.imdbID)
+        (movie, index, self) =>
+          index === self.findIndex((m) => m.imdbID === movie.imdbID)
       )
       setMovies(uniqueMovies)
     } else {
@@ -64,32 +66,30 @@ export default function Home() {
 
     setWatchLater((prev) => {
       if (prev.find((m) => m.imdbID === fullData.imdbID)) return prev
-      return [...prev, fullData]  
+      return [...prev, fullData]
     })
   }
 
-return (
-    <>
-      <nav className="navbar navbar-expand-lg navbar-warning bg-warning">
+  return (
+    <div className="bg-black min-vh-100 text-white">
+      <nav className="navbar navbar-expand-lg bg-warning navbar-l">
         <div className="container">
-<div className="flex items-center space-x-3">
-  <div className="flex items-center space-x-3">
-  <div className="bg-black rounded-pill px-3 py-1 rounded-full">
-    <h4 className="text-sm fw-semibold text-white tracking-wide">
-      Wpu Movie
-    </h4>
-  </div>
-</div>
-
-</div>
+          <div className="flex items-center space-x-3">
+            <div
+              className="bg-black text-white px-2 py-2 d-inline-block"
+              style={{ borderRadius: "8px" }}
+            >
+              <h4 className="m-0 fw-semibold tracking-wide">Wpu Movie</h4>
+            </div>
+          </div>
 
           <button
-        className="btn btn-dark rounded-pill px-4 fw-semibold"
-        onClick={() => setShowWatchList(!showWatchList)}
-      >
-        {showWatchList ? "⬅️ Back" : `🛒 Watchlist (${watchLater.length})`}
-      </button>
-      </div>
+            className="btn btn-dark rounded-pill px-4 fw-semibold text-white"
+            onClick={() => setShowWatchList(!showWatchList)}
+          >
+            {showWatchList ? "⬅️ Back" : `🛒 Watchlist (${watchLater.length})`}
+          </button>
+        </div>
       </nav>
 
       <div className="container mt-5">
@@ -103,41 +103,50 @@ return (
           <>
             <h2 className="text-center mb-3">Search Movie</h2>
             <div className="row justify-content-center">
-        
-         <div className="col-md-7">
-      <div className="d-flex justify-content-center mb-4">
-        <div className="input-group w-100 shadow-sm" style={{ maxWidth: "800px" }}>
-          <input
-            type="text"
-            className="form-control rounded-start-pill px-3 py-2"
-            placeholder=" Search Your Movies..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && searchMovies()}
-          />
-          <button 
-            className="btn btn-dark px-3 py-2 fw-semibold rounded-end-pill"
-            onClick={searchMovies} 
-             >
-            🚀 Search
-          </button>
-        </div>
-      </div>
-    </div>
-         </div>
-          <hr className="hr-custom w-75 mx-auto" />
+              <div className="col-md-7">
+                <div className="d-flex justify-content-center mb-4">
+                  <div
+                    className="input-group w-100 shadow-sm"
+                    style={{ maxWidth: "800px" }}
+                  >
+                    <input
+                      type="text"
+                      className="form-control rounded-start-pill px-3 py-2 bg-white text-dark border-0"
+                      placeholder=" Search Your Movies..."
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && searchMovies()} 
+                    />
+                    <button
+                      className="btn btn-warning px-3 py-2 fw-semibold rounded-end-pill text-black"
+                      onClick={searchMovies}
+                    >
+                      🚀 Search
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr className="hr-custom w-75 mx-auto border-white" />
+
             <div className="row">
               {movies.map((movie) => (
-                <MovieCard key={movie.imdbID} movie={movie} onSelect={getMovieDetail} />
+                <MovieCard
+                  key={movie.imdbID}
+                  movie={movie}
+                  onSelect={getMovieDetail}
+                />
               ))}
             </div>
 
             {hasSearched && movies.length === 0 && (
-              <div className="text-center text-dark fw-bold fs-2 mt-4">
+              <div className="text-center text-light fw-bold fs-2 mt-4">
                 Movies Not Found
               </div>
             )}
-          {selectedMovie && (
+
+            {selectedMovie && (
               <MovieModal
                 selectedMovie={selectedMovie}
                 onAddWatchLater={addToWatchLater}
@@ -147,6 +156,6 @@ return (
           </>
         )}
       </div>
-    </>
+    </div>
   )
- }
+}

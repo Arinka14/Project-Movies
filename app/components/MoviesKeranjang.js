@@ -23,7 +23,7 @@ if (!watchLater || watchLater.length === 0) {
     <div className="mt-4">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h2 className="fw-bold">🎬 Your Watchlist</h2>
-        <button className="btn btn-dark btn-sm" onClick={clearWatchLater}>
+        <button className="bt btn-sm" onClick={clearWatchLater}>
           Clear All
         </button>
       </div>
@@ -53,7 +53,8 @@ if (!watchLater || watchLater.length === 0) {
                 style={{
                   color: clickedId === movie.imdbID ? "gray" : "black",
                 }}
-                onClick={() => setClickedId(movie.imdbID)}
+                onClick={() => setClickedId
+                  (movie.imdbID)}
               >
                 {index + 1}. {movie.Title}
               </h5>
@@ -69,7 +70,7 @@ if (!watchLater || watchLater.length === 0) {
                 </div>
               </div>
             </div>
-
+             
             <button
               onClick={() => removeFromWatchLater(movie.imdbID)}
               style={{
