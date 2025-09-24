@@ -57,7 +57,7 @@ export default function MovieModal({ selectedMovie, onAddWatchLater, onClose }) 
                   </button>
                   <button
                     type="button"
-                    className="btn btn-primary"
+                    className="btn btn-dark"
                     onClick={handleAdd}
                   >
                   + Tonton Nanti

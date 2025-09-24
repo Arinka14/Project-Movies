@@ -3,18 +3,32 @@
 
 export default function MovieCard({ movie, onSelect }) {
   return (
-    <div className="col-md-2 my-4">
-      <div className="card">
+    <div className="col-md-2 my-3">
+      <div
+        className="card shadow-sm"
+        style={{
+          backgroundColor: "#383735ff",
+          color: "white",
+          borderRadius: "12px",
+        }}
+      >
         <img
-          src={movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/300x450?text=No+Image"}
+          src={
+            movie.Poster !== "N/A"
+              ? movie.Poster
+              : "https://via.placeholder.com/300x450?text=No+Image"
+          }
           className="card-img-top"
           alt={movie.Title}
+          style={{
+            borderTopLeftRadius: "12px",
+            borderTopRightRadius: "12px",
+          }}
         />
-        <div className="card-body">
-          <h5 className="card-title">{movie.Title}</h5>
-          <p className="card-text">Year: {movie.Year}</p>
+        
+        <div className="card-body text-center">
           <button
-            className="btn btn-warning"
+            className="btn btn-light w-100"
             data-bs-toggle="modal"
             data-bs-target="#movieModal"
             onClick={() => onSelect(movie.imdbID)}

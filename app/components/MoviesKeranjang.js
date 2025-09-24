@@ -30,11 +30,15 @@ if (!watchLater || watchLater.length === 0) {
 
       <div className="list-group">
         {watchLater.map((movie, index) => (
-          <div
+         <div
             key={movie.imdbID}
             className="list-group-item list-group-item-action d-flex align-items-start mb-3 shadow-sm"
-            style={{ borderRadius: "10px" }}
-          >
+            style={{
+              borderRadius: "10px",
+              backgroundColor: "#383735ff", 
+              color: "white",            
+            }}
+>
             <img
               src={movie.Poster !== "N/A" ? movie.Poster : "/no-image.jpg"}
               alt={movie.Title}
@@ -51,7 +55,7 @@ if (!watchLater || watchLater.length === 0) {
               <h5
                 className="mb-1 fw-bold"
                 style={{
-                  color: clickedId === movie.imdbID ? "gray" : "black",
+                  color: clickedId === movie.imdbID ? "black" : "white",
                 }}
                 onClick={() => setClickedId
                   (movie.imdbID)}
@@ -76,7 +80,7 @@ if (!watchLater || watchLater.length === 0) {
               style={{
                 background: "transparent",
                 border: "1px solid black",
-                color: "black",
+                color: "white",
                 fontSize: "0.85rem",
                 cursor: "pointer",
                 display: "flex",

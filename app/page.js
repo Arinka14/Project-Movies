@@ -36,7 +36,7 @@ export default function Home() {
 
   async function searchMovies() {
     if (!query) return
-    const res = await fetch(`https://www.omdbapi.com/?apikey=fb7a98f8&s=${query}`)
+    const res = await fetch(`https://www.omdbapi.com/?apikey=fb7a98f8&s=${query}`) // code omdb
     const data = await res.json()
 
     setHasSearched(true)
@@ -72,7 +72,7 @@ export default function Home() {
 
   return (
     <div className="bg-black min-vh-100 text-white">
-      <nav className="navbar navbar-expand-lg bg-warning navbar-l">
+      <nav className="navbar navbar-expand-lg bg-secondary navbar-l">
         <div className="container">
           <div className="flex items-center space-x-3">
             <div
@@ -118,7 +118,7 @@ export default function Home() {
                       onKeyDown={(e) => e.key === "Enter" && searchMovies()} 
                     />
                     <button
-                      className="btn btn-warning px-3 py-2 fw-semibold rounded-end-pill text-black"
+                      className="btn btn-secondary px-3 py-2 fw-semibold rounded-end-pill text-black"
                       onClick={searchMovies}
                     >
                       🚀 Search
