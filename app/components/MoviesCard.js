@@ -26,15 +26,15 @@ export default function MovieCard({ movie, onSelect }) {
           }}
         />
         
-        <div className="card-body text-center">
-          <button
-            className="btn btn-light w-100"
-            data-bs-toggle="modal"
-            data-bs-target="#movieModal"
-            onClick={() => onSelect(movie.imdbID)}
-          >
-            See Detail
-          </button>
+    <div className="card-body text-center p-2">
+      <button
+        className="btn btn-light w-100 btn-sm"
+        data-bs-toggle="modal"
+        data-bs-target="#movieModal"
+        onClick={() => onSelect(movie.imdbID)}
+      >
+        See Detail
+      </button>
         </div>
       </div>
     </div>

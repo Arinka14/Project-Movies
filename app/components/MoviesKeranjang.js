@@ -23,9 +23,12 @@ if (!watchLater || watchLater.length === 0) {
     <div className="mt-4">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h2 className="fw-bold">🎬 Your Watchlist</h2>
-        <button className="bt btn-sm" onClick={clearWatchLater}>
-          Clear All
-        </button>
+  <button
+    onClick={clearWatchLater}
+    className="btn btn-secondary btn-sm ms-auto"
+  >
+    🗑️ Clear All
+  </button>
       </div>
 
       <div className="list-group">
@@ -78,9 +81,9 @@ if (!watchLater || watchLater.length === 0) {
             <button
               onClick={() => removeFromWatchLater(movie.imdbID)}
               style={{
-                background: "transparent",
+                background: "white",
                 border: "1px solid black",
-                color: "white",
+                color: "black",
                 fontSize: "0.85rem",
                 cursor: "pointer",
                 display: "flex",
