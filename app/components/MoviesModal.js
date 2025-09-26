@@ -28,14 +28,14 @@ export default function MovieModal({ selectedMovie, onAddWatchLater, onClose }) 
             {selectedMovie ? (
               <>
                 <div className="row">
-                  <div className="col-md-3">
+                  <div className="col-md-4">
                     <img
                       src={selectedMovie.Poster}
                       className="img-fluid"
                       alt={selectedMovie.Title}
                     />
                   </div>
-                  <div className="col-md-9">
+                  <div className="col-md-8 ">
                     <ul className="list-group">
                       <li className="list-group-item"><h3>{selectedMovie.Title}</h3></li>
                       <li className="list-group-item"><strong>Released:</strong> {selectedMovie.Released}</li>
