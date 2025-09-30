@@ -7,8 +7,10 @@ export default function MovieCard({ movie, onSelect }) {
       <div
         className="card shadow-sm"
         style={{
-          backgroundColor: "#383735ff",
+         borderRadius: "12px",
+          background: "linear-gradient(135deg, #383735ff, #3d588bff)", 
           color: "white",
+          transition: "transform 0.2s, box-shadow 0.2s",
           borderRadius: "12px",
         }}
       >

@@ -33,15 +33,16 @@ if (!watchLater || watchLater.length === 0) {
 
       <div className="list-group">
         {watchLater.map((movie, index) => (
-         <div
-            key={movie.imdbID}
+     <div
+        key={movie.imdbID}
             className="list-group-item list-group-item-action d-flex align-items-start mb-3 shadow-sm"
             style={{
-              borderRadius: "10px",
-              backgroundColor: "#383735ff", 
-              color: "white",            
+              borderRadius: "12px",
+              background: "linear-gradient(135deg, #383735ff, #3d588bff)", 
+              color: "white",
+              transition: "transform 0.2s, box-shadow 0.2s",
             }}
->
+          >
             <img
               src={movie.Poster !== "N/A" ? movie.Poster : "/no-image.jpg"}
               alt={movie.Title}

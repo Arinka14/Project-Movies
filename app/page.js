@@ -111,7 +111,7 @@ export default function Home() {
                   >
                     <input
                       type="text"
-                      className="form-control rounded-start-pill px-3 py-2 bg-white text-dark border-0"
+                      className="form-control rounded-start-pill px-3 py-2 bg-white text- border-0"
                       placeholder=" Search Your Movies..."
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
