@@ -55,26 +55,26 @@ export default function MovieModal({ selectedMovie, onAddWatchLater, onClose }) 
                         <h3 className="fw-bold">{selectedMovie.Title}</h3>
                       </li>
                       <li className="list-group-item bg-transparent text-white">
-                        <strong>Released:</strong> {selectedMovie.Released}
+                        <strong>Released : </strong> {selectedMovie.Released}
                       </li>
                       <li className="list-group-item bg-transparent text-white">
-                        <strong>Genre:</strong> {selectedMovie.Genre}
+                        <strong>Genre : </strong> {selectedMovie.Genre}
                       </li>
                       <li className="list-group-item bg-transparent text-white">
-                        <strong>Director:</strong> {selectedMovie.Director}
+                        <strong>Director : </strong> {selectedMovie.Director}
                       </li>
                       <li className="list-group-item bg-transparent text-white">
-                        <strong>Actors:</strong> {selectedMovie.Actors}
+                        <strong>Actors : </strong> {selectedMovie.Actors}
                       </li>
                       <li className="list-group-item bg-transparent text-white">
-                        <strong>Plot:</strong> {selectedMovie.Plot}
+                        <strong>Plot : </strong> {selectedMovie.Plot}
                       </li>
                     </ul>
                   </div>
                 </div>
 
                 <div className="text-end mt-3">
-                  <button
+                  <button    
                     type="button"
                     className="btn btn-dark me-2"
                     data-bs-dismiss="modal"

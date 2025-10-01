@@ -66,14 +66,15 @@ if (!watchLater || watchLater.length === 0) {
               >
                 {index + 1}. {movie.Title}
               </h5>
-
+              
+              <strong>Plot :</strong> {movie.plot}
               <p style={{ fontSize: "0.85rem" }}>{movie.Plot}</p>
               <div style={{ fontSize: "0.8rem" }}>
-                <strong>Released:</strong> {movie.Released}
+                <strong>Released :</strong> {movie.Released}
                 <div style={{ fontSize: "0.8rem" }}>
-                  <strong>Director:</strong> {movie.Director}
+                  <strong>Director :</strong> {movie.Director}
                   <div style={{ fontSize: "0.8rem" }}>
-                    <strong>Actors:</strong> {movie.Actors}
+                    <strong>Actors  :</strong> {movie.Actors}
                   </div>
                 </div>
               </div>

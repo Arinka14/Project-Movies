@@ -118,7 +118,7 @@ export default function Home() {
                       onKeyDown={(e) => e.key === "Enter" && searchMovies()} 
                     />
                     <button
-                      className="btn btn-secondary px-3 py-2 fw-semibold rounded-end-pill text-black"
+                      className="btn btn-secondary px-3 py-2 fw-semibold rounded-end-pill text-w"
                       onClick={searchMovies}
                     >
                       🚀 Search
